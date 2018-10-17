@@ -1,1 +1,15 @@
+<h1>Create Post</h1>
 
+<%= form_for post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, prompt: "Select a Category"%>
+  <br />
+  <%= f.fields_for :categories, post.categories.build do |c| %>
+    <%= c.label "New Category"%>
+    <%= c.text_field :name %>
+  <% end %>
+  <%= f.submit%>
+<% end %>
